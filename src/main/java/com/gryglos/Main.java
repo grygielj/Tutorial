@@ -12,14 +12,25 @@ public class Main {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         Employee employee = new Employee();
-        
-        employee.setFirstName("Jakub");
-        employee.setLastName("Grygiel");
-        employee.setSalary(3333.3);
+        employee.setFirstName("Jan");
+        employee.setLastName("Kowalski");
+        employee.setSalary(2000);
 
         entityManager.getTransaction().begin();
         entityManager.persist(employee);
         entityManager.getTransaction().commit();
+
+        System.out.println("First name: "+employee.getFirstName());
+        System.out.println("Last name: "+employee.getLastName());
+        System.out.println("Salary: "+employee.getSalary());
+        System.out.println("Tax: "+employee.getTax());
+
+        entityManager.refresh(employee);
+
+        System.out.println("First name: "+employee.getFirstName());
+        System.out.println("Last name: "+employee.getLastName());
+        System.out.println("Salary: "+employee.getSalary());
+        System.out.println("Tax: "+employee.getTax());
 
         entityManager.close();
         entityManagerFactory.close();
