@@ -32,6 +32,11 @@ public class Main {
         System.out.println("Salary: "+employee.getSalary());
         System.out.println("Tax: "+employee.getTax());
 
+        entityManager.getTransaction().begin();
+        Employee employee1 = entityManager.find(Employee.class,1L);
+        entityManager.remove(employee1);
+        entityManager.getTransaction().commit();
+
         entityManager.close();
         entityManagerFactory.close();
     }
