@@ -12,13 +12,18 @@ public class Main {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         Employee employee = new Employee();
+        Address address = new Address();
+
+        address.setLocality("Warszawa");
+        address.setStreet("Krochmalna");
+        address.setZipCode("00-864");
+        address.setStreetNumber(3);
+
         employee.setFirstName("Jakub");
         employee.setLastName("Grygiel");
         employee.setSalary(3333.3);
-        employee.setLocality("Konskie");
-        employee.setZipCode("26-200");
-        employee.setStreet("Piłsudskiego");
-        employee.setStreetNumber(111);
+        employee.setAddress(address);
+
 
         entityManager.getTransaction().begin();
         entityManager.persist(employee);
