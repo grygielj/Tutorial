@@ -1,22 +1,31 @@
 package com.gryglos;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Pracownicy")
+@SecondaryTable(name = "Adresy", pkJoinColumns = @PrimaryKeyJoinColumn(name = "employeeId") )
 public class Employee {
+
     @Id
     @GeneratedValue
     private long id;
-    @Column(name = "imie", nullable = false, length = 10)
+
+    @Column(name = "imie")
     private String firstName;
-    @Column(name = "nazwisko", columnDefinition = "VARCHAR(10) NOT NULL")
+    @Column(name = "nazwisko")
     private String lastName;
     @Column(name = "pensja")
     private double salary;
-    @Column(precision = 10, scale = 2)
-    private BigDecimal salary2;
+
+    @Column(table = "Adresy", name = "miejscowosc")
+    private String locality;
+    @Column(table = "Adresy", name = "kodPocztowy")
+    private String zipCode;
+    @Column(table = "Adresy", name = "ulica")
+    private String street;
+    @Column(table = "Adresy", name = "numerDomu")
+    private int streetNumber;
 
     public long getId() {
         return id;
@@ -50,11 +59,35 @@ public class Employee {
         this.salary = salary;
     }
 
-    public BigDecimal getSalary2() {
-        return salary2;
+    public String getLocality() {
+        return locality;
     }
 
-    public void setSalary2(BigDecimal salary2) {
-        this.salary2 = salary2;
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getStreetNumber() {
+        return streetNumber;
+    }
+
+    public void setStreetNumber(int streetNumber) {
+        this.streetNumber = streetNumber;
     }
 }

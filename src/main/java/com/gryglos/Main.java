@@ -15,7 +15,10 @@ public class Main {
         employee.setFirstName("Jakub");
         employee.setLastName("Grygiel");
         employee.setSalary(3333.3);
-        employee.setSalary2(new BigDecimal("12345.3"));
+        employee.setLocality("Konskie");
+        employee.setZipCode("26-200");
+        employee.setStreet("Piłsudskiego");
+        employee.setStreetNumber(111);
 
         entityManager.getTransaction().begin();
         entityManager.persist(employee);
