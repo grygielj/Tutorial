@@ -5,14 +5,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Embeddable
+@Entity
 public class Address {
+
+    @Id
+    @GeneratedValue
+    private long id;
 
     private String locality;
     private String zipCode;
     private String street;
     private int streetNumber;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getLocality() {
         return locality;

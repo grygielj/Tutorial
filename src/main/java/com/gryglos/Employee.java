@@ -13,7 +13,8 @@ public class Employee {
     private String lastName;
     private double salary;
 
-    @Embedded
+    @OneToOne
+    @JoinColumn(name = "addressId")
     private Address address;
 
 
