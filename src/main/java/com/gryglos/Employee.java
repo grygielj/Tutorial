@@ -1,12 +1,10 @@
 package com.gryglos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-public class Owner {
+public class Employee {
 
     @Id
     @GeneratedValue
@@ -14,9 +12,11 @@ public class Owner {
 
     private String firstName;
     private String lastName;
+    private double salary;
 
-    @OneToOne
-    private Cat cat;
+    @OneToMany
+    @JoinColumn(name = "id_ownera")
+    private List<Phone> phones;
 
     public long getId() {
         return id;
@@ -42,11 +42,19 @@ public class Owner {
         this.lastName = lastName;
     }
 
-    public Cat getCat() {
-        return cat;
+    public double getSalary() {
+        return salary;
     }
 
-    public void setCat(Cat cat) {
-        this.cat = cat;
+    public void setSalary(double salary) {
+        this.salary = salary;
+    }
+
+    public List<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(List<Phone> phones) {
+        this.phones = phones;
     }
 }
