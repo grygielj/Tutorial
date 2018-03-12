@@ -26,11 +26,8 @@ public class Main {
         phone1.setNumber("13231321");
         phone2.setNumber("3424234265");
 
-        List<Phone> phones = new ArrayList<>();
-        phones.add(phone1);
-        phones.add(phone2);
-
-        employee.setPhones(phones);
+        phone1.setEmployee(employee);
+        phone2.setEmployee(employee);
 
         entityManager.getTransaction().begin();
         entityManager.persist(employee);
@@ -38,6 +35,7 @@ public class Main {
         entityManager.persist(phone2);
         entityManager.getTransaction().commit();
 
+        entityManager.refresh(employee);
 
 
         entityManager.close();

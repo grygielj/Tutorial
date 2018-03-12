@@ -1,8 +1,6 @@
 package com.gryglos;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Phone {
@@ -13,6 +11,10 @@ public class Phone {
 
     private String type;
     private String number;
+
+    @JoinColumn(name = "id_ownera")
+    @ManyToOne
+    private Employee employee;
 
     public long getId() {
         return id;
@@ -36,5 +38,13 @@ public class Phone {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

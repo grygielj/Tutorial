@@ -14,8 +14,7 @@ public class Employee {
     private String lastName;
     private double salary;
 
-    @OneToMany
-    @JoinColumn(name = "id_ownera")
+    @OneToMany(mappedBy = "employee")
     private List<Phone> phones;
 
     public long getId() {
