@@ -1,10 +1,12 @@
 package com.gryglos;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
-@Entity(name = "Pracownicy")// to zmienia nazwę encji. Odwoływanie odbywa się nazwy encji, nie tabli.
-@Table(name = "Pracownik")// to zmienia nazwę tabeli
-public class Employee {
+@Entity
+public class Owner {
 
     @Id
     @GeneratedValue
@@ -12,8 +14,9 @@ public class Employee {
 
     private String firstName;
     private String lastName;
-    private double salary;
 
+    @OneToOne
+    private Cat cat;
 
     public long getId() {
         return id;
@@ -39,12 +42,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public double getSalary() {
-        return salary;
+    public Cat getCat() {
+        return cat;
     }
 
-    public void setSalary(double salary) {
-        this.salary = salary;
+    public void setCat(Cat cat) {
+        this.cat = cat;
     }
-
 }
