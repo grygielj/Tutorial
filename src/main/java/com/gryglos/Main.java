@@ -2,6 +2,7 @@ package com.gryglos;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,16 +16,39 @@ public class Main {
 
         addEmployees();
 
-        Query query = entityManager.createQuery("select concat(e.firstName, ' ', e.lastName), e.salary*0.2 from Employee e ");
-        Iterator<?> iterator = query.getResultList().iterator();
-
-
-        while (iterator.hasNext()){
-            Object[] item = (Object[]) iterator.next();
-            String name = (String) item[0];
-            double tax = (double) item[1];
-            System.out.println(name+" has to pay "+tax);
+        TypedQuery<Employee> query = entityManager.createQuery("select e from Employee e where e.salary> :minSalary",Employee.class);
+        query.setParameter("minSalary",5000.0);
+        for(Employee employee: query.getResultList()){
+            System.out.println(employee.getFirstName());
+            System.out.println(employee.getLastName());
+            System.out.println(employee.getSalary());
+            System.out.println();
         }
+
+        TypedQuery<Employee> secondQuery = entityManager.createQuery("select e from Employee e where e.salary > ?1 and e.salary < ?2",Employee.class);
+        secondQuery.setParameter(1,2000.0);
+        secondQuery.setParameter(2,3000.0);
+        for(Employee employee: secondQuery.getResultList()){
+            System.out.println(employee.getFirstName());
+            System.out.println(employee.getLastName());
+            System.out.println(employee.getSalary());
+            System.out.println();
+        }
+
+        TypedQuery<Employee> thirdQuery = entityManager.createQuery("select e from Employee e where e.lastName in :names",Employee.class);
+        List<String> names = new ArrayList<>();
+        names.add("Mateusiak");
+        names.add("Bednarek");
+        thirdQuery.setParameter("names",names);
+
+        for(Employee employee: thirdQuery.getResultList()){
+            System.out.println(employee.getFirstName());
+            System.out.println(employee.getLastName());
+            System.out.println(employee.getSalary());
+            System.out.println();
+        }
+
+
         entityManager.close();
         entityManagerFactory.close();
     }
