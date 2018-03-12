@@ -12,7 +12,6 @@ public class Employee {
     private String firstName;
     private String lastName;
     private double salary;
-    private double tax;
 
 
     public long getId() {
@@ -47,7 +46,4 @@ public class Employee {
         this.salary = salary;
     }
 
-    public double getTax() {
-        return tax;
-    }
 }
