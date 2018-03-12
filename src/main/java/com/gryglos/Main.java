@@ -1,10 +1,8 @@
 package com.gryglos;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
@@ -17,16 +15,16 @@ public class Main {
 
         addEmployees();
 
-        TypedQuery<Employee> query = entityManager.createQuery("select e from Employee e where e.salary > 3000 order by e.salary",Employee.class);
+        Query query = entityManager.createQuery("select concat(e.firstName, ' ', e.lastName), e.salary*0.2 from Employee e ");
+        Iterator<?> iterator = query.getResultList().iterator();
 
-        List<Employee>  employees = query.getResultList();
-        for(Employee employee : employees) {
-            System.out.println(employee.getFirstName());
-            System.out.println(employee.getLastName());
-            System.out.println(employee.getSalary());
-            System.out.println();
+
+        while (iterator.hasNext()){
+            Object[] item = (Object[]) iterator.next();
+            String name = (String) item[0];
+            double tax = (double) item[1];
+            System.out.println(name+" has to pay "+tax);
         }
-
         entityManager.close();
         entityManagerFactory.close();
     }
