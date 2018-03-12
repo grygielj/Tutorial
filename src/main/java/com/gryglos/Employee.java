@@ -2,7 +2,8 @@ package com.gryglos;
 
 import javax.persistence.*;
 
-@Entity
+@Entity(name = "Pracownicy")// to zmienia nazwę encji. Odwoływanie odbywa się nazwy encji, nie tabli.
+@Table(name = "Pracownik")// to zmienia nazwę tabeli
 public class Employee {
 
     @Id

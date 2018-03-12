@@ -16,7 +16,7 @@ public class Main {
 
         addEmployees();
 
-        TypedQuery<Employee> query = entityManager.createQuery("select e from Employee e where e.salary> :minSalary",Employee.class);
+        TypedQuery<Employee> query = entityManager.createQuery("select e from Pracownicy e where e.salary> :minSalary",Employee.class);
         query.setParameter("minSalary",5000.0);
         for(Employee employee: query.getResultList()){
             System.out.println(employee.getFirstName());
@@ -25,7 +25,7 @@ public class Main {
             System.out.println();
         }
 
-        TypedQuery<Employee> secondQuery = entityManager.createQuery("select e from Employee e where e.salary > ?1 and e.salary < ?2",Employee.class);
+        TypedQuery<Employee> secondQuery = entityManager.createQuery("select e from Pracownicy e where e.salary > ?1 and e.salary < ?2",Employee.class);
         secondQuery.setParameter(1,2000.0);
         secondQuery.setParameter(2,3000.0);
         for(Employee employee: secondQuery.getResultList()){
@@ -35,7 +35,7 @@ public class Main {
             System.out.println();
         }
 
-        TypedQuery<Employee> thirdQuery = entityManager.createQuery("select e from Employee e where e.lastName in :names",Employee.class);
+        TypedQuery<Employee> thirdQuery = entityManager.createQuery("select e from Pracownicy e where e.lastName in :names",Employee.class);
         List<String> names = new ArrayList<>();
         names.add("Mateusiak");
         names.add("Bednarek");
