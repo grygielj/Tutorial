@@ -14,8 +14,19 @@ public class Employee {
     private String lastName;
     private double salary;
 
-    @OneToMany(mappedBy = "employee")
-    private List<Phone> phones;
+    @ManyToMany(mappedBy = "employees")
+    private List<Project> projects;
+
+
+    public Employee(){
+
+    }
+
+    public Employee(String firstName, String lastName, double salary) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.salary = salary;
+    }
 
     public long getId() {
         return id;
@@ -49,11 +60,11 @@ public class Employee {
         this.salary = salary;
     }
 
-    public List<Phone> getPhones() {
-        return phones;
+    public List<Project> getProjects() {
+        return projects;
     }
 
-    public void setPhones(List<Phone> phones) {
-        this.phones = phones;
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 }

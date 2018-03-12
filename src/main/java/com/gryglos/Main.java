@@ -13,29 +13,42 @@ public class Main {
         EntityManagerFactory entityManagerFactory= Persistence.createEntityManagerFactory("myDatabase");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        Employee employee = new Employee();
-        Phone phone1 = new Phone();
-        Phone phone2 = new Phone();
+        Employee employee1 = new Employee("Jan", "Nowak",123.0);
+        Employee employee2 = new Employee("Maria", "Kowalska",123.0);
+        Employee employee3 = new Employee("Angelika", "Ucińska",123.0);
+        Employee employee4 = new Employee("Robert", "Bednarek",123.0);
+        Employee employee5 = new Employee("Dawid", "Szczęśniak",123.0);
 
-        employee.setFirstName("Jan");
-        employee.setLastName("Nowak");
-        employee.setSalary(1000.33);
+        List<Employee> employees1 = new ArrayList<>();
+        employees1.add(employee1);
+        employees1.add(employee2);
+        employees1.add(employee3);
 
-        phone1.setType("mobile");
-        phone2.setType("home");
-        phone1.setNumber("13231321");
-        phone2.setNumber("3424234265");
+        List<Employee> employees2 = new ArrayList<>();
+        employees2.add(employee2);
+        employees2.add(employee4);
+        employees2.add(employee5);
 
-        phone1.setEmployee(employee);
-        phone2.setEmployee(employee);
+        Project project1 = new Project();
+        Project project2 = new Project();
+
+        project1.setEmployees(employees1);
+        project2.setEmployees(employees2);
+        project1.setName("Projekt 1");
+        project2.setName("Projekt 2");
 
         entityManager.getTransaction().begin();
-        entityManager.persist(employee);
-        entityManager.persist(phone1);
-        entityManager.persist(phone2);
+        entityManager.persist(project1);
+        entityManager.persist(project2);
+        entityManager.persist(employee1);
+        entityManager.persist(employee2);
+        entityManager.persist(employee3);
+        entityManager.persist(employee4);
+        entityManager.persist(employee5);
+
         entityManager.getTransaction().commit();
 
-        entityManager.refresh(employee);
+        entityManager.refresh(employee1);
 
 
         entityManager.close();
