@@ -3,7 +3,7 @@ package com.gryglos;
 import javax.persistence.*;
 
 @Entity
-@DiscriminatorColumn(name = "typ_rekordu")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Person {
 
     @Id
