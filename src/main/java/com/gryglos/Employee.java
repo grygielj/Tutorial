@@ -7,26 +7,20 @@ import java.util.List;
 public class Employee {
 
     @Id
-    @GeneratedValue
+    @TableGenerator(name = "mojGenerator",
+            table = "tabela_z_identyfikatorami",
+            pkColumnName = "nazwa_sekwencji",
+            valueColumnName = "wartosc_identyfikatora",
+            pkColumnValue = "id_pracownika",
+            initialValue = 10,
+            allocationSize = 15)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "mojGenerator")
     private long id;
 
     private String firstName;
     private String lastName;
     private double salary;
 
-    @ManyToMany(mappedBy = "employees")
-    private List<Project> projects;
-
-
-    public Employee(){
-
-    }
-
-    public Employee(String firstName, String lastName, double salary) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.salary = salary;
-    }
 
     public long getId() {
         return id;
@@ -60,11 +54,4 @@ public class Employee {
         this.salary = salary;
     }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
 }
