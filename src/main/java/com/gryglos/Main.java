@@ -1,5 +1,7 @@
 package com.gryglos;
 
+import javafx.scene.control.ProgressBar;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,24 +15,20 @@ public class Main {
         EntityManagerFactory entityManagerFactory= Persistence.createEntityManagerFactory("myDatabase");
         EntityManager entityManager = entityManagerFactory.createEntityManager();
 
-        Employee employee1 = new Employee();
-        Employee employee2 = new Employee();
+        Professor professor1 = new Professor();
+        professor1.setFirstName("Jan");
+        professor1.setLastName("Nowak");
+        professor1.setSalary(7563.0);
 
-        employee1.setFirstName("Jan");
-        employee1.setLastName("Kowalski");
-        employee1.setSalary(2333.3);
-
-        employee2.setFirstName("Kamil");
-        employee2.setLastName("Skowronek");
-        employee2.setSalary(1777.3);
-
+        Student student1 = new Student();
+        student1.setFirstName("Marek");
+        student1.setLastName("Kowalski");
+        student1.setAverageGrade(4.75);
 
         entityManager.getTransaction().begin();
-        entityManager.persist(employee1);
-        entityManager.persist(employee2);
+        entityManager.persist(professor1);
+        entityManager.persist(student1);
         entityManager.getTransaction().commit();
-
-
 
         entityManager.close();
         entityManagerFactory.close();
